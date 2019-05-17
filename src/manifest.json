@@ -1,0 +1,20 @@
+{
+	"manifest_version": 2,
+	"name": "long.af - URL Shortener",
+	"description": "Companion extension for https://long.af",
+	"version": "1.0",
+	"permissions": [
+		"https://api.long.af/*",
+		"activeTab",
+		"notifications"
+	],
+	"icons": {
+		"128": "logo.png"
+	},
+	"browser_action": {},
+	"background": {
+		"scripts": [
+			"background.js"
+		]
+	}
+}
