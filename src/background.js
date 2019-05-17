@@ -1,9 +1,9 @@
-function createNotification(type, title, message, sticky) {
+function createNotification(type, title, message, sticky, timeout) {
 	const notificationContent = {
 		type,
 		iconUrl: 'logo.png',
 		title,
-		message
+		message: message || ''
 	};
 
 	if (typeof InstallTrigger === 'undefined') // Does not work with firefox.
@@ -11,6 +11,10 @@ function createNotification(type, title, message, sticky) {
 
 	const id = `notification_${Date.now()}`;
 	chrome.notifications.create(id, notificationContent);
+
+	if (typeof timeout === 'number')
+		setTimeout(() => chrome.notifications.clear(id), timeout);
+
 	return id;
 }
 
@@ -39,6 +43,7 @@ chrome.browserAction.onClicked.addListener(async tab => {
 		});
 		const json = await response.json();
 		copyText(json.url);
+		createNotification('basic', 'URL shortened and copied to clipboard!', json.url, false, 5000);
 	} catch (err) {
 		console.log(err.toString());
 		createNotification('basic', 'An error has occured!', err.toString(), true);
