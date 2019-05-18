@@ -7,17 +7,14 @@
 
 			body {
 				background: #f7f8f9 !important;
+			}
+
+			body#firefox {
 				padding: 5px;
 			}
 
-			/* == == */
-
-			.btn-group.btn-group-block {
-				display: flex;
-			}
-
 			.btn-group {
-				display: inline-flex;
+				display: flex;
 				flex-wrap: wrap;
 			}
 
@@ -37,15 +34,16 @@
 				margin-left: -.05rem;
 			}
 
-			.btn-group.btn-group-block .btn {
+			.btn-group .btn {
 				flex: 1 0 0;
 			}
 
-			.btn-group .btn {
-				flex: 1 0 auto;
+			.btn-group .btn.active,
+			.btn-group .btn:active,
+			.btn-group .btn:focus,
+			.btn-group .btn:hover {
+				z-index: 1;
 			}
-
-			/* == == */
 
 			.btn {
 				-webkit-appearance: none;
@@ -67,7 +65,6 @@
 				transition: background .2s,border .2s,box-shadow .2s,color .2s;
 				-webkit-user-select: none;
 				-moz-user-select: none;
-				-ms-user-select: none;
 				user-select: none;
 				vertical-align: middle;
 				white-space: nowrap;
@@ -81,22 +78,16 @@
 				height: 1.5rem;
 			}
 
-			.btn-group .btn {
-				flex: 1 0 auto;
-			}
-
-			.btn.active, .btn:active {
+			.btn.active,
+			.btn:active {
 				background: #dc6990 !important;
 				border-color: #d75481 !important;
 				color: #fff !important;
 				text-decoration: none !important;
 			}
 
-			.btn-group .btn.active, .btn-group .btn:active, .btn-group .btn:focus, .btn-group .btn:hover {
-				z-index: 1;
-			}
-
-			.btn:focus, .btn:hover {
+			.btn:focus,
+			.btn:hover {
 				background: #fff;
 				border-color: #dc6990;
 				text-decoration: none;
@@ -109,7 +100,7 @@
 	</head>
 	<body>
 		<h2>Expires</h2>
-		<div id="expires" class="btn-group btn-group-block">
+		<div id="expires" class="btn-group">
 			<button class="btn" value="null">Never</button>
 			<button class="btn" value="day">1 day</button>
 			<button class="btn" value="week">1 week</button>
@@ -117,7 +108,7 @@
 			<button class="btn" value="year">1 year</button>
 		</div>
 		<h2>URL Theme</h2>
-		<div id="type" class="btn-group btn-group-block">
+		<div id="type" class="btn-group">
 			<button class="btn" value="null">Short</button>
 			<button class="btn" value="words">Words</button>
 		</div>
