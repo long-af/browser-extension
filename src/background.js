@@ -1,3 +1,5 @@
+var browser = browser || chrome; // eslint-disable-line
+
 function createNotification(type, title, message, sticky, timeout) {
 	const notificationContent = {
 		type,
@@ -10,10 +12,10 @@ function createNotification(type, title, message, sticky, timeout) {
 		notificationContent.requireInteraction = sticky || false;
 
 	const id = `notification_${Date.now()}`;
-	chrome.notifications.create(id, notificationContent);
+	browser.notifications.create(id, notificationContent);
 
 	if (typeof timeout === 'number')
-		setTimeout(() => chrome.notifications.clear(id), timeout);
+		setTimeout(() => browser.notifications.clear(id), timeout);
 
 	return id;
 }
@@ -28,24 +30,31 @@ function copyText(text) {
 	input.remove();
 }
 
-chrome.notifications.onClicked.addListener(id => {
-	chrome.notifications.clear(id);
+browser.notifications.onClicked.addListener(id => {
+	browser.notifications.clear(id);
 });
 
 /* On extension icon click */
-chrome.browserAction.onClicked.addListener(async tab => {
-	try {
-		const response = await fetch('https://api.long.af/create', {
-			method: 'POST',
-			body: JSON.stringify({
-				url: tab.url
-			})
-		});
-		const json = await response.json();
-		copyText(json.url);
-		createNotification('basic', 'URL shortened and copied to clipboard!', json.url, false, 5000);
-	} catch (err) {
-		console.log(err.toString());
-		createNotification('basic', 'An error has occured!', err.toString(), true);
-	}
+browser.browserAction.onClicked.addListener(tab => {
+	browser.storage.local.get({
+		expires: null,
+		type: null
+	}, async items => {
+		try {
+			const response = await fetch('https://api.long.af/create', {
+				method: 'POST',
+				body: JSON.stringify({
+					url: tab.url,
+					expires: items.expires,
+					type: items.type
+				})
+			});
+			const json = await response.json();
+			copyText(json.url);
+			createNotification('basic', 'URL shortened and copied to clipboard!', json.url, false, 5000);
+		} catch (err) {
+			console.log(err.toString());
+			createNotification('basic', 'An error has occured!', err.toString(), true);
+		}
+	});
 });

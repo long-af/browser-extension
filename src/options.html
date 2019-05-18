@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<style>
+
+			/* == == */
+
+			body {
+				background: #f7f8f9 !important;
+				padding: 5px;
+			}
+
+			/* == == */
+
+			.btn-group.btn-group-block {
+				display: flex;
+			}
+
+			.btn-group {
+				display: inline-flex;
+				flex-wrap: wrap;
+			}
+
+			.btn-group .btn:first-child:not(:last-child) {
+				border-bottom-right-radius: 0;
+				border-top-right-radius: 0;
+			}
+
+			.btn-group .btn:last-child:not(:first-child) {
+				border-bottom-left-radius: 0;
+				border-top-left-radius: 0;
+				margin-left: -.05rem;
+			}
+
+			.btn-group .btn:not(:first-child):not(:last-child) {
+				border-radius: 0;
+				margin-left: -.05rem;
+			}
+
+			.btn-group.btn-group-block .btn {
+				flex: 1 0 0;
+			}
+
+			.btn-group .btn {
+				flex: 1 0 auto;
+			}
+
+			/* == == */
+
+			.btn {
+				-webkit-appearance: none;
+				-moz-appearance: none;
+				appearance: none;
+				background: #fff;
+				border: .05rem solid #df7599;
+				border-radius: .1rem;
+				color: #df7599;
+				cursor: pointer;
+				display: inline-block;
+				font-size: .7rem;
+				height: 1.4rem;
+				line-height: 1.2rem;
+				outline: none;
+				padding: .05rem .3rem;
+				text-align: center;
+				text-decoration: none;
+				transition: background .2s,border .2s,box-shadow .2s,color .2s;
+				-webkit-user-select: none;
+				-moz-user-select: none;
+				-ms-user-select: none;
+				user-select: none;
+				vertical-align: middle;
+				white-space: nowrap;
+				box-shadow: none !important;
+				text-shadow: none !important;
+				margin: 0;
+			}
+
+			#firefox .btn {
+				font-size: 0.9rem;
+				height: 1.5rem;
+			}
+
+			.btn-group .btn {
+				flex: 1 0 auto;
+			}
+
+			.btn.active, .btn:active {
+				background: #dc6990 !important;
+				border-color: #d75481 !important;
+				color: #fff !important;
+				text-decoration: none !important;
+			}
+
+			.btn-group .btn.active, .btn-group .btn:active, .btn-group .btn:focus, .btn-group .btn:hover {
+				z-index: 1;
+			}
+
+			.btn:focus, .btn:hover {
+				background: #fff;
+				border-color: #dc6990;
+				text-decoration: none;
+			}
+
+			*, :after, :before {
+				box-sizing: inherit;
+			}
+		</style>
+	</head>
+	<body>
+		<h2>Expires</h2>
+		<div id="expires" class="btn-group btn-group-block">
+			<button class="btn" value="null">Never</button>
+			<button class="btn" value="day">1 day</button>
+			<button class="btn" value="week">1 week</button>
+			<button class="btn" value="month">1 month</button>
+			<button class="btn" value="year">1 year</button>
+		</div>
+		<h2>URL Theme</h2>
+		<div id="type" class="btn-group btn-group-block">
+			<button class="btn" value="null">Short</button>
+			<button class="btn" value="words">Words</button>
+		</div>
+		<script src="options.js"></script>
+	</body>
+</html>
