@@ -6,10 +6,18 @@ if (typeof InstallTrigger !== 'undefined')
 
 browser.storage.local.get({
 	expires: null,
-	type: null
+	type: null,
+	history: []
 }, items => {
 	document.querySelector(`#expires button[value="${items.expires}"]`).classList.add('active');
 	document.querySelector(`#type button[value="${items.type}"]`).classList.add('active');
+
+	for (const entry of items.history) {
+		const element = document.createElement('a');
+		element.href = entry;
+		element.textContent = entry;
+		document.getElementById('history-list').append(element);
+	}
 });
 
 document.querySelectorAll('#expires button').forEach(el => {

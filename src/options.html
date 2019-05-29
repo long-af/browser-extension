@@ -96,21 +96,47 @@
 			*, :after, :before {
 				box-sizing: inherit;
 			}
+
+			#history a {
+				display: block;
+				color: #df7599;
+				text-decoration: none;
+				padding: 3px 0;
+				font-size: .8rem;
+			}
+
+			#history-list:empty:after {
+				content: 'None';
+				color: #df7599;
+				font-style: italic;
+			}
+
+			#history-clear {
+				float: right;
+			}
 		</style>
 	</head>
 	<body>
-		<h2>Expires</h2>
-		<div id="expires" class="btn-group">
-			<button class="btn" value="null">Never</button>
-			<button class="btn" value="day">1 day</button>
-			<button class="btn" value="week">1 week</button>
-			<button class="btn" value="month">1 month</button>
-			<button class="btn" value="year">1 year</button>
+		<div id="expires">
+			<h2>Expires</h2>
+			<div class="btn-group">
+				<button class="btn" value="null">Never</button>
+				<button class="btn" value="day">1 day</button>
+				<button class="btn" value="week">1 week</button>
+				<button class="btn" value="month">1 month</button>
+				<button class="btn" value="year">1 year</button>
+			</div>
 		</div>
-		<h2>URL Theme</h2>
-		<div id="type" class="btn-group">
-			<button class="btn" value="null">Short</button>
-			<button class="btn" value="words">Words</button>
+		<div id="type">
+			<h2>URL Theme</h2>
+			<div class="btn-group">
+				<button class="btn" value="null">Short</button>
+				<button class="btn" value="words">Words</button>
+			</div>
+		</div>
+		<div id="history">
+			<h2>History</h2>
+			<div id="history-list"></div>
 		</div>
 		<script src="options.js"></script>
 	</body>

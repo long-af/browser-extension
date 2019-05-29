@@ -38,7 +38,8 @@ browser.notifications.onClicked.addListener(id => {
 browser.browserAction.onClicked.addListener(tab => {
 	browser.storage.local.get({
 		expires: null,
-		type: null
+		type: null,
+		history: []
 	}, async items => {
 		try {
 			const response = await fetch('https://api.long.af/create', {
@@ -49,9 +50,17 @@ browser.browserAction.onClicked.addListener(tab => {
 					type: items.type
 				})
 			});
+
 			const json = await response.json();
 			copyText(json.url);
 			createNotification('basic', 'URL shortened and copied to clipboard!', json.url, false, 5000);
+
+			if (items.history.length === 5)
+				items.history.pop();
+
+			items.history.unshift(json.url);
+
+			browser.storage.local.set({ history: items.history });
 		} catch (err) {
 			console.log(err.toString());
 			createNotification('basic', 'An error has occured!', err.toString(), true);
