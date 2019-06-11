@@ -2,7 +2,7 @@
 	"manifest_version": 2,
 	"name": "long.af - URL Shortener",
 	"description": "Companion extension for https://long.af",
-	"version": "1.2",
+	"version": "1.3",
 	"minimum_chrome_version": "60.0.3112",
 	"options_ui": {
 		"page": "options.html",
@@ -15,7 +15,7 @@
 		"clipboardWrite",
 		"storage"
 	],
-	
+
 	"icons": {
 		"128": "logo.png"
 	},
