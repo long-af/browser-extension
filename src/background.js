@@ -1,15 +1,14 @@
 var browser = browser || chrome; // eslint-disable-line
 
-function createNotification(type, title, message, sticky, timeout) {
+function createNotification(title, message = '', sticky = false, timeout) {
 	const notificationContent = {
-		type,
+		type: 'basic',
 		iconUrl: 'logo.png',
-		title,
-		message: message || ''
+		title, message,
+		requireInteraction: typeof InstallTrigger === 'undefined'
+			? sticky
+			: false
 	};
-
-	if (typeof InstallTrigger === 'undefined') // Does not work with firefox.
-		notificationContent.requireInteraction = sticky || false;
 
 	const id = `notification_${Date.now()}`;
 	browser.notifications.create(id, notificationContent);
@@ -30,9 +29,7 @@ function copyText(text) {
 	input.remove();
 }
 
-browser.notifications.onClicked.addListener(id => {
-	browser.notifications.clear(id);
-});
+browser.notifications.onClicked.addListener(browser.notifications.clear);
 
 /* On extension icon click */
 browser.browserAction.onClicked.addListener(tab => {
@@ -55,7 +52,7 @@ browser.browserAction.onClicked.addListener(tab => {
 
 			const json = await response.json();
 			copyText(json.url);
-			createNotification('basic', 'URL shortened and copied to clipboard!', json.url, false, 5000);
+			createNotification('URL shortened and copied to clipboard!', json.url, false, 5000);
 
 			if (items.history.length === 5)
 				items.history.pop();
@@ -65,7 +62,7 @@ browser.browserAction.onClicked.addListener(tab => {
 			browser.storage.local.set({ history: items.history });
 		} catch (err) {
 			console.log(err.toString());
-			createNotification('basic', 'An error has occured!', err.toString(), true);
+			createNotification('An error has occured!', err.toString(), true);
 		} finally {
 			browser.browserAction.setBadgeText({ text: '' });
 		}
