@@ -43,6 +43,7 @@ browser.browserAction.onClicked.addListener(tab => {
 	}, async items => {
 		try {
 			const response = await fetch('https://api.long.af/create', {
+				headers: { 'Content-Type': 'application/json' },
 				method: 'POST',
 				body: JSON.stringify({
 					url: tab.url,
