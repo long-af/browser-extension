@@ -42,6 +42,7 @@ browser.browserAction.onClicked.addListener(tab => {
 		history: []
 	}, async items => {
 		try {
+			browser.browserAction.setBadgeText({ text: 'Uploading' });
 			const response = await fetch('https://api.long.af/create', {
 				headers: { 'Content-Type': 'application/json' },
 				method: 'POST',
@@ -65,6 +66,8 @@ browser.browserAction.onClicked.addListener(tab => {
 		} catch (err) {
 			console.log(err.toString());
 			createNotification('basic', 'An error has occured!', err.toString(), true);
+		} finally {
+			browser.browserAction.setBadgeText({ text: '' });
 		}
 	});
 });
