@@ -5,8 +5,8 @@
 	"author": "pilar6195",
 	"license": "MIT",
 	"devDependencies": {
-		"eslint": "^5.16.0",
-		"eslint-config-aqua": "^5.0.0"
+		"eslint": "^6.5.1",
+		"eslint-config-aqua": "^7.0.1"
 	},
 	"eslintConfig": {
 		"env": {
@@ -14,12 +14,10 @@
 			"es6": true,
 			"webextensions": true
 		},
-
 		"extends": [
 			"eslint:recommended",
 			"aqua"
 		],
-
 		"rules": {
 			"curly": 0,
 			"padded-blocks": 0,
