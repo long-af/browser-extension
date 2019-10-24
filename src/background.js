@@ -29,10 +29,7 @@ function copyText(text) {
 	input.remove();
 }
 
-browser.notifications.onClicked.addListener(browser.notifications.clear);
-
-/* On extension icon click */
-browser.browserAction.onClicked.addListener(tab => {
+function shortenLink(url) {
 	browser.storage.local.get({
 		expires: null,
 		type: null,
@@ -44,7 +41,7 @@ browser.browserAction.onClicked.addListener(tab => {
 				headers: { 'Content-Type': 'application/json' },
 				method: 'POST',
 				body: JSON.stringify({
-					url: tab.url,
+					url: url,
 					expires: items.expires,
 					type: items.type
 				})
@@ -67,4 +64,15 @@ browser.browserAction.onClicked.addListener(tab => {
 			browser.browserAction.setBadgeText({ text: '' });
 		}
 	});
+}
+
+/* On extension icon click */
+browser.browserAction.onClicked.addListener(tab => shortenLink(tab.url));
+
+browser.notifications.onClicked.addListener(browser.notifications.clear);
+
+chrome.contextMenus.create({
+	title: 'long.af',
+	contexts: ['page', 'link'],
+	onclick: a => shortenLink(a.linkUrl || a.pageUrl)
 });

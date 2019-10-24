@@ -1,7 +1,7 @@
 {
 	"name": "long.af-extension",
 	"description": "Extension for long.af",
-	"version": "1.3",
+	"version": "1.4",
 	"author": "pilar6195",
 	"license": "MIT",
 	"devDependencies": {
