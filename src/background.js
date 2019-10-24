@@ -4,11 +4,12 @@ function createNotification(title, message = '', sticky = false, timeout) {
 	const notificationContent = {
 		type: 'basic',
 		iconUrl: 'logo.png',
-		title, message,
-		requireInteraction: typeof InstallTrigger === 'undefined'
-			? sticky
-			: false
+		title, message
 	};
+
+	if (typeof InstallTrigger === 'undefined') {
+		notificationContent.requireInteraction = sticky;
+	}
 
 	const id = `notification_${Date.now()}`;
 	browser.notifications.create(id, notificationContent);
