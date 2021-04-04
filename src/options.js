@@ -7,10 +7,12 @@ if (typeof InstallTrigger !== 'undefined')
 browser.storage.local.get({
 	expires: null,
 	type: null,
-	history: []
+	history: [],
+	notification: true
 }, items => {
 	document.querySelector(`#expires button[value="${items.expires}"]`).classList.add('active');
 	document.querySelector(`#type button[value="${items.type}"]`).classList.add('active');
+	document.querySelector(`#notification button[value="${items.notification}"]`).classList.add('active');
 
 	for (const entry of items.history) {
 		const element = document.createElement('a');
@@ -33,5 +35,13 @@ document.querySelectorAll('#type button').forEach(el => {
 		document.querySelector('#type button.active').classList.remove('active');
 		this.classList.add('active');
 		browser.storage.local.set({ type: this.value === 'null' ? null : this.value });
+	});
+});
+
+document.querySelectorAll('#notification button').forEach(el => {
+	el.addEventListener('click', function click() {
+		document.querySelector('#notification button.active').classList.remove('active');
+		this.classList.add('active');
+		browser.storage.local.set({ notification: this.value === 'true' ? true : false });
 	});
 });

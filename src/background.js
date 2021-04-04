@@ -34,7 +34,8 @@ function shortenLink(url) {
 	browser.storage.local.get({
 		expires: null,
 		type: null,
-		history: []
+		history: [],
+		notification: true
 	}, async items => {
 		try {
 			browser.browserAction.setBadgeText({ text: 'Uploading' });
@@ -50,7 +51,7 @@ function shortenLink(url) {
 
 			const json = await response.json();
 			copyText(json.url);
-			createNotification('URL shortened and copied to clipboard!', json.url, false, 5000);
+			if (items.notification) createNotification('URL shortened and copied to clipboard!', json.url, false, 5000);
 
 			if (items.history.length === 5)
 				items.history.pop();
