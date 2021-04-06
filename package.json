@@ -5,8 +5,8 @@
 	"author": "pilar6195",
 	"license": "MIT",
 	"devDependencies": {
-		"eslint": "^6.5.1",
-		"eslint-config-aqua": "^7.0.1"
+		"eslint": "^7.23.0",
+		"eslint-config-aqua": "^8.1.2"
 	},
 	"eslintConfig": {
 		"env": {
